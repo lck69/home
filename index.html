@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>69好房網 - 專業首選</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --professional-blue: #002D62; /* 專業深藍 */
+            --gold-primary: #D4AF37;     /* 經典金 */
+            --gold-light: #FFDF00;       /* 亮金 */
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fcf6ba, #aa771c);
+            --nav-bg: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%); /* 淺色漸層底 */
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Noto Sans TC', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* 背景層 */
+        .bg-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('0.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -2;
+        }
+
+        /* 導覽列設計 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--professional-blue);
+            font-weight: 900; /* 粗體 */
+            font-size: 1.1rem;
+            padding: 10px 25px;
+            border-radius: 5px;
+            background: var(--gold-gradient); /* 金黃色背景 */
+            transition: all 0.4s ease;
+            display: inline-block;
+            border: 1px solid rgba(184, 134, 11, 0.3);
+            text-align: center;
+        }
+
+        /* 按鈕滑動變白色的動效 */
+        .nav-link:hover {
+            background: #ffffff; /* 變白色 */
+            color: var(--professional-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 主畫面遮罩 */
+        .main-overlay {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(186, 65, 5, 0.15); /* 輕微暗化背景 */
+            backdrop-filter: blur(3px);
+            padding-top: 80px; /* 避開導覽列 */
+            box-sizing: border-box;
+        }
+
+        .brand-container {
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Logo 球體 - 改為金系配色 */
+        .logo-sphere {
+            width: 45vw;
+            height: 45vw;
+            max-width: 280px;
+            max-height: 280px;
+            background: radial-gradient(circle, #f45c0a 0%, #e65c06 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 40px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.4);
+            position: relative;
+            border: 5px solid var(--gold-primary);
+        }
+
+        /* 修改圖騰為金黃色 */
+        .taiji-69 {
+            width: 85%;
+            height: 85%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FFDF00;stop-opacity:1" /><stop offset="50%" style="stop-color:%23D4AF37;stop-opacity:1" /><stop offset="100%" style="stop-color:%23B8860B;stop-opacity:1" /></linearGradient></defs><path d="M50 12 C 28 12, 18 32, 18 50 C 18 68, 32 82, 50 82 C 62 82, 72 74, 72 60 C 72 48, 62 38, 50 38 C 40 38, 32 46, 32 58" fill="none" stroke="url(%23goldGrad)" stroke-width="12" stroke-linecap="round"/><path d="M50 88 C 72 88, 82 68, 82 50 C 82 32, 68 18, 50 18 C 38 18, 28 26, 28 38 C 28 50, 38 60, 50 60 C 60 60, 68 52, 68 42" fill="none" stroke="url(%23goldGrad)" stroke-width="12" stroke-linecap="round"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: gold-pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes gold-pulse {
+            0%, 100% { filter: drop-shadow(0 0 5px var(--gold-light)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 25px var(--gold-light)); transform: scale(1.05); }
+        }
+
+        /* 公司名稱標題 */
+        .company-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 10vw, 72px);
+            font-weight: 900;
+            margin: 0;
+            background: var(--gold-gradient);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 4s linear infinite;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* 標語 */
+        .brand-tagline {
+            font-size: clamp(16px, 4vw, 24px);
+            font-weight: 700;
+            margin-top: 10px;
+            letter-spacing: 6px;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        /* 手機端優化 */
+        @media (max-width: 600px) {
+            .nav-container { gap: 8px; padding: 5px; }
+            .nav-link { 
+                padding: 8px 12px; 
+                font-size: 0.9rem; 
+                flex: 1 1 40%; /* 手機端兩兩一排 */
+            }
+            .main-overlay { padding-top: 120px; }
+        }
+
+
+        
+/* 頁尾基礎樣式 */
+footer {
+  background-color: #f18118 ; /* 深底色讓對比更漂亮 */
+  color: #eacb4f;            /* 預設文字白色 */
+  text-align: center;        /* 全部置中 */
+  padding: 3px 15px;        /* 內間距，手機也舒服 */
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+
+/* 69好房網 專屬金黃色 */
+.footer-highlight {
+  color: #FFD700; /* 標準金色 */
+  font-weight: bold;
+}
+
+/* 第二行標語 */
+.footer-slogan {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">首頁</a>
+            <a href="https://hayleyweb.site" class="nav-link">好房推薦</a>
+            <a href="new2.html" class="nav-link">知識大補帖</a>
+            <a href="https://lin.ee/qYzhRemP" class="nav-link">聯絡我們</a>
+        </div>
+    </nav>
+
+    <div class="bg-wrapper"></div>
+
+    <div class="main-overlay">
+        <div class="brand-container">
+            <div class="logo-sphere">
+                <div class="taiji-69"></div>
+            </div>
+            
+            <h1 class="company-title">69 Good</h1>
+            <p class="brand-tagline">69好房網 誠信專業</p>
+        </div>
+    </div>
+
+
+
+<footer>
+  <p>&copy; 2026 首頁 | <span class="footer-highlight">６９好房網</span> | 購屋最佳選擇</p>
+  <p class="footer-slogan">HAYLEY 網站資訊架構設計</p>
+</footer>
+</body>
+</html>

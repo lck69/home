@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>2026 購屋全攻略 | 69好房網 專業指南</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 顏色優化：使用更深邃、專業的午夜藍 */
+            --pro-blue: #0f172a; 
+            --header-blue: #1e293b; /* 頂部較淺一點的午夜藍，增加層次 */
+            --gold-accent: #D4AF37; 
+            --gold-light: #f7d669;
+            --glass-white: rgba(255, 255, 255, 0.95);
+            --text-main: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--pro-blue);
+            line-height: 1.8;
+            background: url('0.jpg') no-repeat center center fixed;
+            background-size: cover;
+            /* 防止內容溢出 */
+            overflow-x: hidden;
+        }
+
+        /* 右上角關閉按鈕 */
+        .close-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #fff;
+            border: 2px solid var(--gold-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 26px;
+            color: var(--pro-blue);
+            z-index: 9999;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 600px) {
+            .close-btn { width: 45px; height: 45px; top: 15px; right: 15px; font-size: 20px; }
+        }
+
+        .close-btn:hover {
+            background: var(--gold-accent);
+            color: #fff;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* 專業頂部橫幅：顏色優化為深午夜藍漸層 */
+        header {
+            padding: 50px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            backdrop-filter: blur(12px);
+            border-bottom: 5px solid var(--gold-accent);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 8vw, 4rem); /* 優化手機端縮放比例 */
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff, var(--gold-light), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            margin-top: 20px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 內容佈局 */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px; /* 稍微縮小邊距 */
+        }
+
+        /* 知識卡片設計 */
+        .knowledge-card {
+            display: flex;
+            flex-wrap: wrap;
+            background: var(--glass-white);
+            margin-bottom: 80px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            transition: all 0.5s ease;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* 圖片區塊：修正手機端 min-width 導致的溢出 */
+        .card-image {
+            flex: 1.2;
+            min-width: 300px; /* 從 400px 調降，確保在窄螢幕不溢出 */
+            height: 550px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        /* 文字內容區塊 */
+        .card-content {
+            flex: 1.5;
+            padding: 60px; /* 基礎內距 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 300px;
+            word-wrap: break-word; /* 強制長字換行 */
+        }
+
+        .knowledge-card:nth-child(even) { flex-direction: row-reverse; }
+
+        .tag {
+            display: inline-block;
+            background: var(--pro-blue);
+            color: var(--gold-light);
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 2.4rem);
+            margin: 0 0 20px 0;
+            color: var(--pro-blue);
+            font-weight: 900;
+            line-height: 1.3;
+        }
+
+        .sub-title {
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            color: var(--gold-accent);
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-left: 6px solid var(--gold-accent);
+            padding-left: 15px;
+        }
+
+        .card-content p {
+            font-size: 1.15rem;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        /* 專業列表清單 */
+        .knowledge-list { padding: 0; margin: 0; list-style: none; }
+        .knowledge-list li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .knowledge-list li::before {
+            content: '🏠';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .highlight {
+            color: #b91c1c;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 900;
+        }
+
+        .placeholder-section {
+            border: 3px dashed var(--gold-accent);
+            border-radius: 30px;
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.4);
+            margin-bottom: 80px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer strong { color: var(--gold-light); }
+
+        /* ──────────────────────────────────────────────────
+           響應式細節微調（核心修改區）
+           ────────────────────────────────────────────────── */
+        
+        @media (max-width: 992px) {
+            .card-image { min-width: 100%; height: 350px; }
+            .card-content { padding: 40px 30px; }
+            .knowledge-card:nth-child(even) { flex-direction: row; }
+            .container { margin: 30px auto; }
+        }
+
+        @media (max-width: 600px) {
+            header { padding: 60px 15px 40px 15px; }
+            /* 解決文字被遮擋的核心：縮減 padding，讓出空間給文字 */
+            .card-content { padding: 30px 20px; }
+            .card-image { height: 250px; }
+            .knowledge-list li { font-size: 1rem; padding-left: 30px; }
+            h2 { letter-spacing: 0; }
+            .placeholder-section { padding: 50px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="index.html" class="close-btn" title="返回首頁">✕</a>
+
+<header>
+    <h1>🏠 購屋知識大補帖</h1>
+    <p>關注69好房網～速學交易流程～讓您馬上看懂</p>
+</header>
+
+<div class="container">
+
+    <article class="knowledge-card">
+        <div class="card-image">
+            <img src="1.png" alt="財務規劃與預算評估">
+        </div>
+        <div class="card-content">
+            <span class="tag">01 | FINANCIAL</span>
+            <h2>精準財務模型：不止是 333 原則</h2>
+            <div class="sub-title">構建穩健的購屋預算機制</div>
+            <p>在 2026 年的高通膨環境下，購屋預算應採「動態負債比」評估。除自備款外，必須額外預留 <span class="highlight">10% - 15% 的隱形成本</span>，確保現金流彈性。</p>
+            <ul class="knowledge-list">
+                <li>負債比檢視 - 每月總房貸支出不應超過家庭月收入的 35%。</li>
+                <li>利率緩衝區 - 試算升息 2-3 碼後的還款壓力承受度。</li>
+                <li>隱藏開銷預留 - 包含契稅、代書費、首年火險與必要修繕費。</li>
+            </ul>
+        </div>
+    </article>
+
+    <article class="knowledge-card">
+        <div class="card-image">
+            <img src="3.png" alt="結構安全與地段選擇">
+        </div>
+        <div class="card-content">
+            <span class="tag">02 | SELECTION</span>
+            <h2>內行看門道：結構、採光與地段</h2>
+            <div class="sub-title">專業看屋的 20 項必看指標</div>
+            <p>房地產的價值來自「不可替代性」。看屋時應跳脫裝潢表象，專注於建築本身的物理狀態與區域未來的都市更新計畫。</p>
+            <ul class="knowledge-list">
+                <li>結構體健康度 - 觀察樑柱銜接處是否有 <span class="highlight">45度剪力斜裂縫</span>。</li>
+                <li>採光通風效能 - 確保雙面採光與衛浴開窗，預防長期潮濕問題。</li>
+                <li>地段增值潛力 - 鎖定 TOD（大眾運輸導向）周邊 500 公尺黃金圈。</li>
+            </ul>
+        </div>
+    </article>
+
+    <article class="knowledge-card">
+        <div class="card-image">
+            <img src="2.png" alt="法律合約與產權保障">
+        </div>
+        <div class="card-content">
+            <span class="tag">03 | LEGAL & PROTECTION</span>
+            <h2>合約陷阱多，法律保障是核心</h2>
+            <div class="sub-title">簽約與交屋後的法律防護網</div>
+            <p>議價與簽約階段，資訊對稱是關鍵。請核對<span class="highlight">內政部實價登錄</span>，並落實所有口頭承諾於書面合約中，保障自身權益。</p>
+            <ul class="knowledge-list">
+                <li>斡旋金 vs 要約書 - 法律效力差異評估，避免高額違約金風險。</li>
+                <li>專業驗屋程序 - 聘請第三方公司進行「紅外線滲水」與「管路內視鏡」檢測。</li>
+                <li>價金履約保證 - 確保款項進入第三方信託帳戶，直到產權移轉完成。</li>
+            </ul>
+        </div>
+    </article>
+
+    <div class="placeholder-section">
+        <p>── 深度專題 · 持續解密中 ──</p>
+        <small style="color: var(--gold-accent); font-weight: 700;">（即將上線：2026 房貸利率補貼、稅務節節稅規劃、老屋翻新指南）</small>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 購屋知識站  |  <strong>６９好房網</strong>　|　購屋最佳選擇</p>
+    <p style="margin-top: 10px; font-size: 0.85rem;">HAYLEY 網站資訊架構設計</p>
+</footer>
+
+</body>
+</html>
