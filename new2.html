@@ -2,33 +2,38 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title> 69好房網 專業指南</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 顏色優化：使用更深邃、專業的午夜藍 */
             --pro-blue: #0f172a; 
-            --header-blue: #1e293b; /* 頂部較淺一點的午夜藍，增加層次 */
+            --header-blue: #1e293b;
             --gold-accent: #D4AF37; 
             --gold-light: #f7d669;
             --glass-white: rgba(255, 255, 255, 0.95);
             --text-main: #1a1a1a;
         }
 
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
             color: var(--pro-blue);
             line-height: 1.8;
             background: url('0.jpg') no-repeat center center fixed;
             background-size: cover;
-            /* 防止內容溢出 */
-            overflow-x: hidden;
         }
 
-        /* 右上角關閉按鈕 */
         .close-btn {
             position: fixed;
             top: 25px;
@@ -59,7 +64,6 @@
             transform: rotate(90deg) scale(1.1);
         }
 
-        /* 專業頂部橫幅：顏色優化為深午夜藍漸層 */
         header {
             padding: 50px 20px;
             text-align: center;
@@ -71,7 +75,7 @@
         }
 
         header h1 {
-            font-size: clamp(2rem, 8vw, 4rem); /* 優化手機端縮放比例 */
+            font-size: clamp(2rem, 8vw, 4rem);
             margin: 0;
             font-weight: 900;
             letter-spacing: 4px;
@@ -92,17 +96,16 @@
             margin-right: auto;
         }
 
-        /* 內容佈局 */
         .container {
             max-width: 1200px;
             margin: 60px auto;
-            padding: 0 20px; /* 稍微縮小邊距 */
+            padding: 0 20px;
+            width: 100%;
         }
 
-        /* 知識卡片設計 */
         .knowledge-card {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             background: var(--glass-white);
             margin-bottom: 80px;
             border-radius: 30px;
@@ -116,10 +119,8 @@
             transform: translateY(-10px);
         }
 
-        /* 圖片區塊：修正手機端 min-width 導致的溢出 */
         .card-image {
-            flex: 1.2;
-            min-width: 300px; /* 從 400px 調降，確保在窄螢幕不溢出 */
+            width: 100%;
             height: 550px;
             overflow: hidden;
         }
@@ -131,18 +132,14 @@
             transition: transform 0.8s ease;
         }
 
-        /* 文字內容區塊 */
         .card-content {
-            flex: 1.5;
-            padding: 60px; /* 基礎內距 */
+            width: 100%;
+            padding: 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-width: 300px;
-            word-wrap: break-word; /* 強制長字換行 */
+            word-wrap: break-word;
         }
-
-        .knowledge-card:nth-child(even) { flex-direction: row-reverse; }
 
         .tag {
             display: inline-block;
@@ -180,8 +177,11 @@
             text-align: justify;
         }
 
-        /* 專業列表清單 */
-        .knowledge-list { padding: 0; margin: 0; list-style: none; }
+        .knowledge-list { 
+            padding: 0; 
+            margin: 0; 
+            list-style: none; 
+        }
         .knowledge-list li {
             margin-bottom: 15px;
             padding-left: 35px;
@@ -224,23 +224,42 @@
         footer strong { color: var(--gold-light); }
 
         /* ──────────────────────────────────────────────────
-           響應式細節微調（核心修改區）
+           電腦版還原成左右排版（手機自動上下）
            ────────────────────────────────────────────────── */
-        
+        @media (min-width: 993px) {
+            .knowledge-card {
+                flex-direction: row;
+            }
+            .card-image {
+                flex: 1.2;
+                height: 550px;
+            }
+            .card-content {
+                flex: 1.5;
+                padding: 60px;
+            }
+            .knowledge-card:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        }
+
+        /* ──────────────────────────────────────────────────
+           平板
+           ────────────────────────────────────────────────── */
         @media (max-width: 992px) {
-            .card-image { min-width: 100%; height: 350px; }
+            .card-image { height: 350px; }
             .card-content { padding: 40px 30px; }
-            .knowledge-card:nth-child(even) { flex-direction: row; }
             .container { margin: 30px auto; }
         }
 
+        /* ──────────────────────────────────────────────────
+           手機（iPhone + Android 全部穩定）
+           ────────────────────────────────────────────────── */
         @media (max-width: 600px) {
             header { padding: 60px 15px 40px 15px; }
-            /* 解決文字被遮擋的核心：縮減 padding，讓出空間給文字 */
             .card-content { padding: 30px 20px; }
             .card-image { height: 250px; }
             .knowledge-list li { font-size: 1rem; padding-left: 30px; }
-            h2 { letter-spacing: 0; }
             .placeholder-section { padding: 50px 15px; }
         }
     </style>
